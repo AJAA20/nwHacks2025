@@ -1,11 +1,119 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login Page</title>
-</head>
-<body>
-    <h1>{{ message }}</h1>  <!-- Display the message passed from FastAPI -->
-</body>
+    <head>
+        <title>Post Your Reels!</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <style>
+            /* General styles */
+            body {
+                font-family: Arial, sans-serif;
+                margin: 0;
+                height: 100vh; /* Full viewport height */
+                display: flex;
+                align-items: center; /* Vertically center content */
+                justify-content: center; /* Horizontally center content */
+                background-color: white; /* Set background to white */
+            }
+
+            /* Container for the content */
+            .container {
+                display: flex;
+                width: 80%;
+                max-width: 1200px;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                border-radius: 8px;
+                overflow: hidden;
+                background-color: #f4f4f4;
+            }
+
+            /* Header section */
+            header {
+                padding: 20px;
+                width: 70%; /* Occupies most of the container */
+                background-color: #f4f4f4;
+            }
+
+            /* Main section */
+            main {
+                padding: 20px;
+                width: 30%; /* Adjust width as needed */
+                background-color: #e9ecef;
+                box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
+            }
+
+            /* Styling for checkboxes */
+            .checkbox-label {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                width: 200px;
+                margin-bottom: 10px;
+            }
+
+            .checkbox-label input {
+                margin-left: 10px;
+            }
+
+            /* Video preview styling */
+            #videoPreview {
+                margin-top: 10px;
+                border: 2px solid #ccc;
+                border-radius: 5px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <header>
+                <h1>Upload your video file</h1>
+                <input type="file" id="videoInput" accept="video/*">
+
+                <!-- Video Element to Preview the Uploaded Video -->
+                <video id="videoPreview" controls width="100%"></video>
+            </header>
+
+            <main>
+                <h3>Choose platform that you want to upload</h3>
+                <form action="/action_page.php">
+                    <div class="checkbox-label">
+                        <label for="platform1">Instagram</label>
+                        <input type="checkbox" id="platform1" name="platform1" value="Instagram">
+                    </div>
+                    <div class="checkbox-label">
+                        <label for="platform2">Youtube</label>
+                        <input type="checkbox" id="platform2" name="platform2" value="Youtube">
+                    </div>
+                    <div class="checkbox-label">
+                        <label for="platform3">TikTok</label>
+                        <input type="checkbox" id="platform3" name="platform3" value="TikTok">
+                    </div>
+                    <br>
+                    <input type="submit" value="Submit">
+                </form>
+            </main>
+        </div>
+
+        <script>
+            const videoPreview = document.getElementById('videoPreview');
+            const videoInput = document.getElementById('videoInput');
+    
+            // Event Listener to Handle Video File Selection
+            videoInput.addEventListener('change', (event) => {
+                const file = event.target.files[0];
+                if (file) {
+                    // Create a URL for the selected video file
+                    const videoURL = URL.createObjectURL(file);
+    
+                    // Set the video preview's source to the selected file
+                    videoPreview.src = videoURL;
+    
+                    // Optionally, load the video
+                    videoPreview.load();
+                } else {
+                    videoPreview.src = ''; // Clear the video preview if no file is selected
+                }
+            });
+        </script>
+    </body>
 </html>
