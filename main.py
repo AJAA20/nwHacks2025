@@ -26,4 +26,10 @@ async def read_root(request: Request):
     # (some templates may need access to request information, such as the user's IP address, etc)
     return templates.TemplateResponse("test.html", {"request": request, "message": "nwHacks2025"})
 
+@app.get("/post", response_class=HTMLResponse)
+async def read_post(request: Request):
+    return templates.TemplateResponse("post.html", {"request": request})
 
+@app.get("/login", response_class=HTMLResponse)
+async def read_login(request: Request):
+    return templates.TemplateResponse("loginpage.html", {"request": request})
