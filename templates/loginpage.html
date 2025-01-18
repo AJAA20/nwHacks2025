@@ -41,10 +41,29 @@
             .image-grid img:hover {
                 transform: scale(1.1); 
             }
+
+            .post-button {
+                padding: 10px 20px;
+                margin: 20px;
+                background-color: #4CAF50;
+                color: white;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+                font-size: 16px;
+                text-align: center;
+            }
+
+            .post-button:hover {
+                background-color: #45a049;
+            }
         </style>
     </head>
     <body>
-        <h1>Post Once, Display Everywhere</h1>
+        <div>
+            <h1>Post Once, Display Everywhere</h1>
+            <button class="post-button">Post</button>
+        </div>
         <div class="image-grid">
             <button>
                 <img src="images/youtube-logo.jpg" alt="Youtube Logo">
