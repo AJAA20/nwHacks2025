@@ -2,8 +2,74 @@
 <html>
     <head>
         <title>Login Page</title>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                margin: 0;
+                display: flex;
+                justify-content: center; /* Center horizontally */
+                align-items: center; /* Center vertically */
+                height: 100vh; /* Full viewport height */
+                background-color: #f9f9f9; /* Optional: Add a background color */
+            }
+    
+            h1 {
+                text-align: center; 
+            }
+    
+            .image-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+                gap: 20px;
+                padding: 10px;
+            }
+    
+            .image-grid button {
+                border: none;
+                background: none;
+                cursor: pointer;
+            }
+    
+            .image-grid img {
+                width: 100%;
+                height: auto;
+                border: 2px solid black;
+                border-radius: 5px; 
+                transition: transform 0.3s ease; 
+            }
+    
+            .image-grid img:hover {
+                transform: scale(1.1); 
+            }
+        </style>
     </head>
     <body>
-        
+        <h1>Post Reels Once, Display Reels Everywhere</h1>
+        <div class="image-grid">
+            <button>
+                <img src="images/youtube-logo.jpg" alt="Youtube Logo">
+            </button>
+            <button>
+                <img src="image2.jpg" alt="Image 2">
+            </button>
+            <button>
+                <img src="image3.jpg" alt="Image 3">
+            </button>
+            <button>
+                <img src="image4.jpg" alt="Image 4">
+            </button>
+            <button>
+                <img src="image5.jpg" alt="Image 5">
+            </button>
+            <button>
+                <img src="image6.jpg" alt="Image 6">
+            </button>
+            <button>
+                <img src="image7.jpg" alt="Image 7">
+            </button>
+            <button>
+                <img src="image8.jpg" alt="Image 8">
+            </button>
+        </div>
     </body>
 </html>
