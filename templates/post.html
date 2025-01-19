@@ -131,14 +131,14 @@
         <!-- Left Section -->
         <header>
             <h1>Upload Your Video File</h1>
-            <input type="file" id="videoInput" accept="video/*">
+            <input type="file" id="videoInput" name="file" accept=".mp4, .mov" required>
             <video id="videoPreview" controls></video>
             <h3></h3>
-                <form>
+                <form action="/upload-video/" method="post" enctype="multipart/form-data">
                     <label for="name"></label>
-                    <input type="text" id="name" name="name" placeholder="Add a caption...">
+                    <input type="text" id="name" name="caption" placeholder="Add a caption..." required>
                     <br><br>
-                </form>
+                </form> 
         </header>
 
         <!-- Right Section -->
