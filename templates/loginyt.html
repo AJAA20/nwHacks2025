@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login to YouTube</title>
+</head>
+<body>
+  <h1>Login to YouTube</h1>
+
+  <!-- Login Form -->
+  <form id="google-login-form" method="GET">
+    <button type="submit">Sign in with Google</button>
+  </form>
+
+  <h2>Response from Backend:</h2>
+  <p id="serverResponse"></p>
+
+  <script>
+    document.getElementById('google-login-form').addEventListener('submit', async (event) => {
+      event.preventDefault(); // Prevent default form submission behavior
+
+      try {
+        // Make a GET request to the backend to get the authorization URL
+        const response = await fetch('/auth/google');
+        
+        // Parse the JSON response
+        const data = await response.json();
+
+        if (data.authorization_url) {
+          // Redirect the user to the Google OAuth login page
+          window.location.href = data.authorization_url;
+        } else {
+          // If no URL is returned, show an error message
+          document.getElementById('serverResponse').textContent = 'Failed to get authorization URL.';
+        }
+      } catch (error) {
+        console.error('Error:', error);
+        document.getElementById('serverResponse').textContent = 'An error occurred while trying to log in.';
+      }
+    });
+  </script>
+</body>
+</html>
+
