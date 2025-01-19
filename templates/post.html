@@ -181,6 +181,52 @@
                 videoPreview.src = '';
             }
         });
+
+        document.getElementById('uploadForm').addEventListener('submit', async (event) => {
+            event.preventDefault(); // Prevent the default form submission
+
+            const videoInput = document.getElementById('videoInput');
+            const caption = document.getElementById('name').value;
+            const instagramChecked = document.getElementById('platform1').checked;
+
+            // Check if the user selected a video
+            if (!videoInput.files[0]) {
+                alert("Please select a video to upload.");
+                return;
+            }
+
+            // Prepare form data
+            const formData = new FormData();
+            formData.append('file', videoInput.files[0]); // Match 'file' expected by the backend
+            formData.append('caption', caption); // Match 'caption' expected by the backend
+
+            // Add Instagram platform flag (if checked)
+            if (instagramChecked) {
+                formData.append('platforms', JSON.stringify({ instagram: true })); // Match 'platforms' format
+            } else {
+                alert("Please select at least one platform.");
+                return;
+            }
+
+            try {
+                const response = await fetch('http://127.0.0.1:8000/upload-instagram/', {
+                    method: 'POST',
+                    body: formData,
+                });
+
+                const result = await response.json();
+
+                if (response.ok) {
+                    alert("Upload successful! " + JSON.stringify(result));
+                } else {
+                    alert("Upload failed: " + JSON.stringify(result));
+                }
+            } catch (error) {
+                console.error("An error occurred:", error);
+                alert("An error occurred: " + error.message);
+            }
+        });
+
     </script>
 </body>
 </html>

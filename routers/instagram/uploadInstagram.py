@@ -4,7 +4,7 @@ import os
 from dotenv import load_dotenv
 
 # Specify the path to your credential.env file
-env_file = 'credential.env'
+env_file = 'credentials.env'
 
 # Load environment variables from the credential.env file
 load_dotenv(dotenv_path=env_file)
@@ -20,12 +20,13 @@ INSTAGRAM_USER_ID = os.getenv("INSTAGRAM_USER_ID")
 BASE_URL = f"https://graph.instagram.com/{INSTAGRAM_USER_ID}/media"
 
 # Function to upload video to Instagram
-async def upload_to_instagram(video_url: str):
+async def upload_to_instagram(video_url: str, caption: str):
     # Step 1: Create a media container for the video
     params = {
         'media_type': 'VIDEO',
         'video_url': video_url,
-        'access_token': INSTAGRAM_ACCESS_TOKEN
+        'access_token': INSTAGRAM_ACCESS_TOKEN,
+        'caption': caption,
     }
 
     async with httpx.AsyncClient() as client:
@@ -67,6 +68,10 @@ async def upload_video(file: UploadFile = File(...)):
     
     video_url = f"http://your_storage_url/{file_path}"
 
+    result = await upload_to_instagram(video_url, caption)
+
+    os.remove(file_path)
+
     # Upload the video to Instagram
-    return await upload_to_instagram(video_url)
+    return result
 
