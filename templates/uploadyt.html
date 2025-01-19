@@ -1,55 +1,138 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Upload Video to YouTube</title>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>ReelSync YouTube</title>
+   <style>
+       body {
+           font-family: 'Arial', sans-serif;
+           background-color: #f9f9f9;
+           color: #333;
+           margin: 0;
+           padding: 0;
+           display: flex;
+           justify-content: center;
+           align-items: center;
+           min-height: 100vh;
+           text-align: center;
+       }
+
+
+       h1 {
+           color: #444;
+           font-size: 2rem;
+           margin-bottom: 20px;
+       }
+
+
+       form {
+           background-color: #ffffff;
+           padding: 20px;
+           border-radius: 10px;
+           box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+           max-width: 400px;
+           width: 100%;
+       }
+
+
+       label {
+           display: block;
+           font-weight: bold;
+           margin: 10px 0 5px;
+           color: #555;
+       }
+
+
+       input[type="text"], input[type="file"] {
+           width: calc(100% - 20px);
+           padding: 10px;
+           margin: 5px 0 15px;
+           border: 1px solid #ccc;
+           border-radius: 5px;
+           font-size: 1rem;
+       }
+
+
+       button {
+           background-color: #FF0000; /* YouTube Red */
+           color: white;
+           font-size: 1rem;
+           font-weight: bold;
+           border: none;
+           border-radius: 5px;
+           padding: 10px 15px;
+           cursor: pointer;
+           transition: transform 0.2s, box-shadow 0.2s;
+       }
+
+
+       button:hover {
+           transform: scale(1.05);
+           box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+       }
+
+
+       button:active {
+           transform: scale(0.95);
+       }
+   </style>
 </head>
 <body>
-    <h1>Upload a Video to YouTube</h1>
-    
-    <form id="upload-form" enctype="multipart/form-data">
-        <label for="videoTitle">Video Title:</label><br>
-        <input type="text" id="videoTitle" name="videoTitle" required><br><br>
+   <div>
+       <h1>Upload Your Reel to YouTube</h1>
 
-        <label for="videoDescription">Video Description:</label><br>
-        <input type="text" id="videoDescription" name="videoDescription" required><br><br>
 
-        <label for="videoFile">Choose Video File:</label><br>
-        <input type="file" id="videoFile" name="videoFile" accept="video/*" required><br><br>
+       <form id="upload-form" enctype="multipart/form-data">
+           <label for="videoTitle">Video Title:</label>
+           <input type="text" id="videoTitle" name="videoTitle" required>
 
-        <button type="submit">Upload Video</button>
-    </form>
 
-    <script>
-        document.getElementById('upload-form').addEventListener('submit', function(event) {
-            event.preventDefault();
+           <label for="videoDescription">Video Description:</label>
+           <input type="text" id="videoDescription" name="videoDescription" required>
 
-            // Get user input values
-            var title = document.getElementById('videoTitle').value;
-            var description = document.getElementById('videoDescription').value;
-            var file = document.getElementById('videoFile').files[0];
 
-            var formData = new FormData();
-            formData.append('title', title);
-            formData.append('description', description);
-            formData.append('videoFile', file);
+           <label for="videoFile">Choose Video File:</label>
+           <input type="file" id="videoFile" name="videoFile" accept="video/*" required>
 
-            // Send the video data to the backend for uploading to YouTube
-            fetch('/upload', {
-                method: 'POST',
-                body: formData
-            })
-            .then(response => response.json())
-            .then(data => {
-                console.log('Video uploaded:', data);
-                alert('Video uploaded successfully!');
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                alert('Failed to upload video.');
-            });
-        });
-    </script>
+
+           <button type="submit">Upload Video</button>
+       </form>
+   </div>
+
+
+   <script>
+       document.getElementById('upload-form').addEventListener('submit', function(event) {
+           event.preventDefault();
+
+
+           // Get user input values
+           var title = document.getElementById('videoTitle').value;
+           var description = document.getElementById('videoDescription').value;
+           var file = document.getElementById('videoFile').files[0];
+
+
+           var formData = new FormData();
+           formData.append('title', title);
+           formData.append('description', description);
+           formData.append('videoFile', file);
+
+
+           // Send the video data to the backend for uploading to YouTube
+           fetch('/upload', {
+               method: 'POST',
+               body: formData
+           })
+           .then(response => response.json())
+           .then(data => {
+               console.log('Video uploaded:', data);
+               alert('Video uploaded successfully!');
+           })
+           .catch(error => {
+               console.error('Error:', error);
+               alert('Failed to upload video.');
+           });
+       });
+   </script>
 </body>
 </html>
